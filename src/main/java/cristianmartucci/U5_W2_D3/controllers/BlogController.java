@@ -1,6 +1,7 @@
 package cristianmartucci.U5_W2_D3.controllers;
 
 import cristianmartucci.U5_W2_D3.entities.Blog;
+import cristianmartucci.U5_W2_D3.entities.BlogPaylod;
 import cristianmartucci.U5_W2_D3.services.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ public class BlogController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private Blog saveBlog(@RequestBody Blog blog){
+    private Blog saveBlog(@RequestBody BlogPaylod blog){
         return this.blogService.saveBlog(blog);
     }
 

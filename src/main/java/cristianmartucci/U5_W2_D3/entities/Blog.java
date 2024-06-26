@@ -19,16 +19,16 @@ public class Blog {
     private String cover;
     private String contenuto;
     private int tempoDiLettura;
+
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
+    @JoinColumn(name = "author_idd", nullable = false)
     private Author author;
 
-    public Blog(String categoria, String titolo, String cover, String contenuto, int tempoDiLettura, Author author) {
+    public Blog(String categoria, String titolo, String cover, String contenuto, int tempoDiLettura) {
         this.categoria = categoria;
         this.titolo = titolo;
         this.cover = cover;
         this.contenuto = contenuto;
         this.tempoDiLettura = tempoDiLettura;
-        this.author = author;
     }
 }
