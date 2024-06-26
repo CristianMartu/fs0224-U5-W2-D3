@@ -11,11 +11,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
-public class BlogPaylod {
+public class BlogPayload {
     private String categoria;
     private String titolo;
     private String cover;
     private String contenuto;
     private int tempoDiLettura;
+
     private UUID authorId;
 }

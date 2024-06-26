@@ -14,6 +14,7 @@ public class Blog {
     @Id
     @GeneratedValue
     private UUID id;
+
     private String categoria;
     private String titolo;
     private String cover;
@@ -21,14 +22,15 @@ public class Blog {
     private int tempoDiLettura;
 
     @ManyToOne
-    @JoinColumn(name = "author_idd", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
-    public Blog(String categoria, String titolo, String cover, String contenuto, int tempoDiLettura) {
+    public Blog(String categoria, String titolo, String cover, String contenuto, int tempoDiLettura, Author author) {
         this.categoria = categoria;
         this.titolo = titolo;
         this.cover = cover;
         this.contenuto = contenuto;
         this.tempoDiLettura = tempoDiLettura;
+        this.author = author;
     }
 }

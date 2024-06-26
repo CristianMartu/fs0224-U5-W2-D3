@@ -2,7 +2,7 @@ package cristianmartucci.U5_W2_D3.services;
 
 import cristianmartucci.U5_W2_D3.entities.Author;
 import cristianmartucci.U5_W2_D3.entities.Blog;
-import cristianmartucci.U5_W2_D3.entities.BlogPaylod;
+import cristianmartucci.U5_W2_D3.entities.BlogPayload;
 import cristianmartucci.U5_W2_D3.exceptions.NotFoundException;
 import cristianmartucci.U5_W2_D3.repositories.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +28,11 @@ public class BlogService {
         return blogRepository.findAll(pageable);
     }
 
-    public Blog saveBlog(BlogPaylod updateBlog){
-        Author author = authorService.findById(updateBlog.getAuthorId());
+    public Blog saveBlog(BlogPayload blogPayload){
+        Author author = authorService.findById(blogPayload.getAuthorId());
 
-        Blog blog = new Blog();
-        blog.setCategoria(updateBlog.getCategoria());
-        blog.setTitolo(updateBlog.getTitolo());
-        blog.setCover(updateBlog.getCover());
-        blog.setContenuto(updateBlog.getContenuto());
-        blog.setTempoDiLettura(updateBlog.getTempoDiLettura());
-
-        blog.setAuthor(author);
+        Blog blog = new Blog(blogPayload.getCategoria(), blogPayload.getTitolo(), blogPayload.getCover(),
+                blogPayload.getContenuto(), blogPayload.getTempoDiLettura(), author);
 
         return this.blogRepository.save(blog);
     }
@@ -47,13 +41,17 @@ public class BlogService {
         return this.blogRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public Blog updateBlog(UUID id, Blog updateBlog){
+    public Blog updateBlog(UUID id, BlogPayload updateBlog){
         Blog blog = this.findById(id);
+
         blog.setCategoria(updateBlog.getCategoria());
         blog.setTitolo(updateBlog.getTitolo());
         blog.setCover(updateBlog.getCover());
         blog.setContenuto(updateBlog.getContenuto());
         blog.setTempoDiLettura(updateBlog.getTempoDiLettura());
+
+        blog.setAuthor(authorService.findById(updateBlog.getAuthorId()));
+        
         return this.blogRepository.save(blog);
     }
 
